@@ -40,7 +40,8 @@ class CallbackModule(object):
     def human_log(self, data):
         if type(data) == dict:
             for field in FIELDS:
-                if field in data.keys() and data[field]:
+                no_log = data.get('_ansible_no_log')
+                if field in data.keys() and data[field] and no_log != True:
                     output = self._format_output(data[field])
                     print("\n{0}: {1}".format(field, output.replace("\\n","\n")))
 
