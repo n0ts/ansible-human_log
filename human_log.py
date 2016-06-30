@@ -17,6 +17,10 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 try:
     import simplejson as json
 except ImportError:
@@ -48,7 +52,7 @@ class CallbackModule(object):
     def _format_output(self, output):
         # Strip unicode
         if type(output) == unicode:
-            output = output.encode('ascii', 'replace')
+            output = output.encode(sys.getdefaultencoding(), 'replace')
 
         # If output is a dict
         if type(output) == dict:
