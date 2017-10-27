@@ -1,6 +1,6 @@
 # ansible-human_log
 
-This Ansible callback plugin for human-readable result logging for Ansible 1.9/2.0.
+This Ansible callback plugin for human-readable result logging for Ansible 1.9/2.0-2.4.
 
 To use, set the callback plugins directory in ansible.cfg:
 ```
