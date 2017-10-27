@@ -30,7 +30,7 @@ except ImportError:
 
 # Fields to reformat output for
 FIELDS = ['cmd', 'command', 'start', 'end', 'delta', 'msg', 'stdout',
-          'stderr', 'results']
+          'stderr', 'results', 'failed', 'reason']
 
 
 class CallbackModule(CallbackBase):
