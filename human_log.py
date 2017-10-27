@@ -46,13 +46,14 @@ class CallbackModule(CallbackBase):
     def human_log(self, data):
         if type(data) == dict:
             for field in FIELDS:
-                no_log = data.get('_ansible_no_log')
+                no_log = data.get('human_log_no_log', False)
+                log_only = data.get('human_log_log_only', False)
                 if field in data.keys() and data[field] and no_log != True:
                     output = self._format_output(data[field])
                     # The following two lines are a hack to make it work with UTF-8 characters
                     if type(output) != list:
                         output = output.encode('utf-8', 'replace')
-                    print("\n{0}: {1}".format(field, output.replace("\\n","\n")))
+                    self._display.display("\n{0}:\n{1}".format(field, output.replace("\\n","\n")), log_only=log_only)
 
     def _format_output(self, output):
         # Strip unicode
@@ -61,7 +62,7 @@ class CallbackModule(CallbackBase):
 
         # If output is a dict
         if type(output) == dict:
-            return json.dumps(output, indent=2)
+            return json.dumps(output, indent=2, sort_keys=True)
 
         # If output is a list of dicts
         if type(output) == list and type(output[0]) == dict:
@@ -75,25 +76,11 @@ class CallbackModule(CallbackBase):
                         if field in item.keys():
                             copy[field] = self._format_output(item[field])
                 real_output.append(copy)
-            return json.dumps(output, indent=2)
+            return json.dumps(output, indent=2, sort_keys=True)
 
         # If output is a list of strings
         if type(output) == list and type(output[0]) != dict:
-            # Strip newline characters
-            real_output = list()
-            for item in output:
-                if "\n" in item:
-                    for string in item.split("\n"):
-                        real_output.append(string)
-                else:
-                    real_output.append(item)
-
-            # Reformat lists with line breaks only if the total length is
-            # >75 chars
-            if len("".join(real_output)) > 75:
-                return "\n" + "\n".join(real_output)
-            else:
-                return " ".join(real_output)
+            return '\n'.join(output)
 
         # Otherwise it's a string, (or an int, float, etc.) just return it
         return str(output)
