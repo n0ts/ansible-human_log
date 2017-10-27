@@ -46,14 +46,13 @@ class CallbackModule(CallbackBase):
     def human_log(self, data):
         if type(data) == dict:
             for field in FIELDS:
-                no_log = data.get('human_log_no_log', False)
-                log_only = data.get('human_log_log_only', False)
+                no_log = data.get('_ansible_no_log', False)
                 if field in data.keys() and data[field] and no_log != True:
                     output = self._format_output(data[field])
                     # The following two lines are a hack to make it work with UTF-8 characters
                     if type(output) != list:
                         output = output.encode('utf-8', 'replace')
-                    self._display.display("\n{0}:\n{1}".format(field, output.replace("\\n","\n")), log_only=log_only)
+                    self._display.display("\n{0}:\n{1}".format(field, output.replace("\\n","\n")), log_only=False)
 
     def _format_output(self, output):
         # Strip unicode
