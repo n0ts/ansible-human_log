@@ -32,7 +32,7 @@ Alternatively you can set the environment variable
 `ANSIBLE_STDOUT_CALLBACK` to `debug`.
 
 
-## Reference
+## References
 
-Inspired from: https://github.com/redhat-openstack/khaleesi/blob/master/plugins/callbacks/human_log.py
-Original from: https://gist.github.com/cliffano/9868180
+- Inspired from: https://github.com/redhat-openstack/khaleesi/blob/master/plugins/callbacks/human_log.py
+- Original from: https://gist.github.com/cliffano/9868180
