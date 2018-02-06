@@ -1,7 +1,8 @@
 # ansible-human_log
 
-This Ansible callback plugin for human-readable result logging for Ansible 1.9/2.0-2.4.
-
+This Ansible callback plugin for human-readable result logging for Ansible 2.0-2.4.
+It [used to support 1.9.x](https://github.com/n0ts/ansible-human_log/issues/15),
+but this is not the case any more.
 
 ## Usage
 
