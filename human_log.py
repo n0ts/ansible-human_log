@@ -17,6 +17,7 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+from importlib import reload
 from ansible.plugins.callback import CallbackBase
 
 import sys
