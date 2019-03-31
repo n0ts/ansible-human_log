@@ -20,8 +20,10 @@ __metaclass__ = type
 from ansible.plugins.callback import CallbackBase
 
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
+if sys.version[0] == '2':
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
 
 try:
     import simplejson as json
